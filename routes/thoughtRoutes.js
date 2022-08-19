@@ -1,4 +1,4 @@
-const { thoughtControllers } = require('../controllers')
+const { thoughtControllers, reactionControllers } = require('../controllers')
 
 const thoughtRoutes = require('express').Router()
 
@@ -11,6 +11,10 @@ const {
   updateThoughtById,
   deleteThoughtById
 } = thoughtControllers
+const {
+  createReaction,
+  deleteReaction
+} = reactionControllers
 
 thoughtRoutes.route('/')
   .get(getThoughts)
@@ -19,5 +23,8 @@ thoughtRoutes.route('/:thoughtId')
   .get(getThoughtById)
   .put(updateThoughtById)
   .delete(deleteThoughtById)
+thoughtRoutes.route('/:thoughtId/reactions')
+  .post(createReaction)
+  .delete(deleteReaction)
 
 module.exports = thoughtRoutes
