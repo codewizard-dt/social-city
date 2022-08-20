@@ -8,7 +8,7 @@ const userControllers = {
     return res.json(users)
   }),
   getUserById: tryCatch(async (req, res) => {
-    const user = await User.findById(req.params.userId)
+    const user = await User.findById(req.params.userId).populate(['thoughts', 'friends'])
     return res.json(user)
   }),
   createUser: tryCatch(async (req, res) => {
