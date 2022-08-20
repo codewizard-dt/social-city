@@ -1,5 +1,5 @@
 const tryCatch = require('../utils/tryCatchHandler');
-const User = require("../models/User")
+const { User, Thought } = require("../models")
 const { ObjectId } = require('mongoose').Types;
 
 const userControllers = {
@@ -24,8 +24,13 @@ const userControllers = {
     return res.json(user)
   }),
   deleteUserById: tryCatch(async (req, res) => {
-    const result = await User.findByIdAndDelete(req.params.userId)
-    return res.json(result)
+    const user = await User.findByIdAndDelete(req.params.userId)
+    const thoughts = await Thought.deleteMany({
+      _id: {
+        $in: user.thoughts.map(thoughtId => ObjectId(thoughtId))
+      }
+    })
+    return res.json({ user, thoughts })
   }),
   addFriend: tryCatch(async (req, res) => {
     const { userId, friendId } = req.params
