@@ -21,29 +21,31 @@ Thought Cloud is an Express server with a RESTful API that allows users to post 
 
 Start the server with `node server.js`.
 
+[Walkthrough Video](https://drive.google.com/file/d/1EKbsz3f9MmZf4ZF08oy2e7Cws4jpOmXY/view?usp=sharing) covers how to use the RESTful routes and discusses the API responses.
+
 ## Models
 ### User
-| Property | Type | Unique | Required |
-|----|----|----|----|
-| _id | ObjectId | 
+| Property | Type | Unique | Required | Default |
+|----|----|----|----|----|
+| _id | ObjectId | true |  | new ObjectId |
 | username | string | true | true |
 | email | string | true | true |
 | thoughts | ThoughtId[] | 
 | friends | UserId[] |
 ### Thought
-| Property | Type | Unique | Required |
-|----|----|----|----|
-| _id | ObjectId | 
+| Property | Type | Unique | Required | Default |
+|----|----|----|----|----|
+| _id | ObjectId | true |  | new ObjectId |
 | thoughtText | string | | true |
 | username | string | | true
-| createdAt | date | | has default |
+| createdAt | date | | | Date.now()
 ### Reaction
-| Property | Type | Unique | Required |
-|----|----|----|----|
-| reactionId | ObjectId | 
+| Property | Type | Unique | Required | Default |
+|----|----|----|----|----|
+| reactionId | ObjectId | true |  | new ObjectId |
 | reactionBody | string | | true |
 | username | string | | true |
-| createdAt | date | | has default |
+| createdAt | date | | | Date.now()
 
 ## Routes
 

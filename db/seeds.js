@@ -20,7 +20,7 @@ connection.once('open', async () => {
     })
     for (let user of userData) {
       let friendIds = []
-      while (friendIds.length < 3) {
+      while (friendIds.length < 5) {
         let friendId = userData[Math.floor(Math.random() * userData.length)]._id
         if (friendId !== user._id && !friendIds.includes(friendId)) friendIds.push(friendId)
       }

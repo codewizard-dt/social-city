@@ -28,7 +28,33 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
+}, {
+  id: false,
+  virtuals: {
+    friendCount: {
+      get() {
+        return this.friends.length
+      }
+    }
+  },
+  methods: {
+    withMutuals: async function () {
+      if (!this.populated('friends')) await this.populate('friends')
+      let user = this.toObject()
+      let friendIds = user.friends.map(({ _id }) => _id.toString())
+
+      for (let friend of user.friends) {
+        let subFriendIds = friend.friends.map(_id => _id.toString())
+        let mutuals = friendIds.filter(id => subFriendIds.includes(id))
+        friend.mutualFriends = mutuals
+        friend.mutualFriendCount = mutuals.length
+      }
+      return user
+    }
+  }
 })
+
+userSchema.set('toObject', { getters: true })
 
 const User = new model('User', userSchema)
 
