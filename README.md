@@ -24,6 +24,7 @@ Start the server with `node server.js`.
 [Walkthrough Video](https://drive.google.com/file/d/1EKbsz3f9MmZf4ZF08oy2e7Cws4jpOmXY/view?usp=sharing) covers how to use the RESTful routes and discusses the API responses.
 
 ## Models
+All models are created using [Mongoose](https://mongoosejs.com/) for a [MongoDB](https://www.mongodb.com/) database.
 ### User
 | Property | Type | Unique | Required | Default |
 |----|----|----|----|----|
